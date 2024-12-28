@@ -15,6 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('last_name');
+            $table->foreignId('country_id')->constrained('countries');
+            $table->enum( 'type', ['male', 'female', 'other']);
+            $table->string('username')->unique();
             $table->string('email')->unique();
             $table->string('password');
             $table->string('role')->default('user');
