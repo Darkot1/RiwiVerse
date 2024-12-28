@@ -6,5 +6,31 @@ use Illuminate\Database\Eloquent\Model;
 
 class post extends Model
 {
-    //
+    protected $fillable = [
+        'user_id',
+        'content',
+        'image',
+    ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+    public function likes()
+    {
+        return $this->hasMany(Like::class);
+    }
+
+    public function dislikes()
+    {
+        return $this->hasMany(Dislike::class);
+    }
+
+
 }
