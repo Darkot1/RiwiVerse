@@ -9,16 +9,34 @@ import { Head, Link, useForm } from '@inertiajs/vue3';
 const form = useForm({
     name: '',
     last_name: '',
+    username: '',
     email: '',
+    country_id: '',
+    type: '',
     password: '',
     password_confirmation: '',
 });
+
+const genderOptions = [
+    { value: 'male', label: 'Masculino' },
+    { value: 'female', label: 'Femenino' },
+    { value: 'other', label: 'Otro' }
+];
 
 const submit = () => {
     form.post(route('register'), {
         onFinish: () => form.reset('password', 'password_confirmation'),
     });
 };
+
+const props = defineProps({
+    countries: {
+        type: Array,
+        required: true
+    }
+});
+
+console.log('Countries:', props.countries);
 </script>
 
 <template>
@@ -51,11 +69,61 @@ const submit = () => {
                     class="mt-1 block w-full"
                     v-model="form.last_name"
                     required
-                    autofocus
                     autocomplete="last_name"
                 />
 
                 <InputError class="mt-2" :message="form.errors.last_name" />
+            </div>
+
+            <div class="mt-4">
+                <InputLabel for="username" value="Nombre de usuario" />
+
+                <TextInput
+                    id="username"
+                    type="text"
+                    class="mt-1 block w-full"
+                    v-model="form.username"
+                    required
+                    autocomplete="username"
+                />
+
+                <InputError class="mt-2" :message="form.errors.username" />
+            </div>
+
+            <div class="mt-4">
+                <InputLabel for="country_id" value="País" />
+
+                <select
+                    id="country_id"
+                    v-model="form.country_id"
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                    required
+                >
+                    <option value="">Selecciona un país</option>
+                    <option v-for="country in countries" :key="country.id" :value="country.id">
+                        {{ country.name }}
+                    </option>
+                </select>
+
+                <InputError class="mt-2" :message="form.errors.country_id" />
+            </div>
+
+            <div class="mt-4">
+                <InputLabel for="type" value="Género" />
+
+                <select
+                    id="type"
+                    v-model="form.type"
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                    required
+                >
+                    <option value="">Selecciona un género</option>
+                    <option v-for="option in genderOptions" :key="option.value" :value="option.value">
+                        {{ option.label }}
+                    </option>
+                </select>
+
+                <InputError class="mt-2" :message="form.errors.type" />
             </div>
 
             <div class="mt-4">
