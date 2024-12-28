@@ -44,154 +44,135 @@ console.log('Countries:', props.countries);
         <Head title="Register" />
 
         <form @submit.prevent="submit">
-            <div>
-                <InputLabel for="name" value="Nombre" />
+            <div class="grid grid-cols-2 gap-4">
+                <div class="space-y-4">
+                    <div>
+                        <InputLabel for="name" value="Nombre" />
+                        <TextInput
+                            id="name"
+                            type="text"
+                            v-model="form.name"
+                            required
+                            autofocus
+                            autocomplete="name"
+                        />
+                        <InputError :message="form.errors.name" />
+                    </div>
 
-                <TextInput
-                    id="name"
-                    type="text"
-                    class="mt-1 block w-full"
-                    v-model="form.name"
-                    required
-                    autofocus
-                    autocomplete="name"
-                />
+                    <div>
+                        <InputLabel for="country_id" value="País" />
+                        <select
+                            id="country_id"
+                            v-model="form.country_id"
+                            class="w-full border-0 border-b-2 border-gray-300 focus:border-gray-500 focus:ring-0 focus:outline-none bg-transparent py-2 transition-colors duration-300"
+                            required
+                        >
+                            <option value="">Selecciona un país</option>
+                            <option v-for="country in countries" :key="country.id" :value="country.id">
+                                {{ country.name }}
+                            </option>
+                        </select>
+                        <InputError :message="form.errors.country_id" />
+                    </div>
 
-                <InputError class="mt-2" :message="form.errors.name" />
+                    <div>
+                        <InputLabel for="username" value="Usuario" />
+                        <TextInput
+                            id="username"
+                            type="text"
+                            v-model="form.username"
+                            required
+                            autocomplete="username"
+                        />
+                        <InputError :message="form.errors.username" />
+                    </div>
+
+                    <div>
+                        <InputLabel for="password" value="Contraseña" />
+                        <TextInput
+                            id="password"
+                            type="password"
+                            v-model="form.password"
+                            required
+                            autocomplete="new-password"
+                        />
+                        <InputError :message="form.errors.password" />
+                    </div>
+                </div>
+
+                <div class="space-y-4">
+                    <div>
+                        <InputLabel for="last_name" value="Apellido" />
+                        <TextInput
+                            id="last_name"
+                            type="text"
+                            v-model="form.last_name"
+                            required
+                            autocomplete="last_name"
+                        />
+                        <InputError :message="form.errors.last_name" />
+                    </div>
+
+                    <div>
+                        <InputLabel for="type" value="Género" />
+                        <select
+                            id="type"
+                            v-model="form.type"
+                            class="w-full border-0 border-b-2 border-gray-300 focus:border-gray-500 focus:ring-0 focus:outline-none bg-transparent py-2 transition-colors duration-300"
+                            required
+                        >
+                            <option value="">Selecciona un género</option>
+                            <option v-for="option in genderOptions" :key="option.value" :value="option.value">
+                                {{ option.label }}
+                            </option>
+                        </select>
+                        <InputError :message="form.errors.type" />
+                    </div>
+
+                    <div>
+                        <InputLabel for="email" value="Correo" />
+                        <TextInput
+                            id="email"
+                            type="email"
+                            v-model="form.email"
+                            required
+                            autocomplete="username"
+                        />
+                        <InputError :message="form.errors.email" />
+                    </div>
+
+                    <div>
+                        <InputLabel for="password_confirmation" value="Confirmar contraseña" />
+                        <TextInput
+                            id="password_confirmation"
+                            type="password"
+                            v-model="form.password_confirmation"
+                            required
+                            autocomplete="new-password"
+                        />
+                        <InputError :message="form.errors.password_confirmation" />
+                    </div>
+                </div>
             </div>
 
-            <div class="mt-4">
-                <InputLabel for="last_name" value="Apellido" />
-
-                <TextInput
-                    id="last_name"
-                    type="text"
-                    class="mt-1 block w-full"
-                    v-model="form.last_name"
-                    required
-                    autocomplete="last_name"
-                />
-
-                <InputError class="mt-2" :message="form.errors.last_name" />
-            </div>
-
-            <div class="mt-4">
-                <InputLabel for="username" value="Nombre de usuario" />
-
-                <TextInput
-                    id="username"
-                    type="text"
-                    class="mt-1 block w-full"
-                    v-model="form.username"
-                    required
-                    autocomplete="username"
-                />
-
-                <InputError class="mt-2" :message="form.errors.username" />
-            </div>
-
-            <div class="mt-4">
-                <InputLabel for="country_id" value="País" />
-
-                <select
-                    id="country_id"
-                    v-model="form.country_id"
-                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-                    required
-                >
-                    <option value="">Selecciona un país</option>
-                    <option v-for="country in countries" :key="country.id" :value="country.id">
-                        {{ country.name }}
-                    </option>
-                </select>
-
-                <InputError class="mt-2" :message="form.errors.country_id" />
-            </div>
-
-            <div class="mt-4">
-                <InputLabel for="type" value="Género" />
-
-                <select
-                    id="type"
-                    v-model="form.type"
-                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-                    required
-                >
-                    <option value="">Selecciona un género</option>
-                    <option v-for="option in genderOptions" :key="option.value" :value="option.value">
-                        {{ option.label }}
-                    </option>
-                </select>
-
-                <InputError class="mt-2" :message="form.errors.type" />
-            </div>
-
-            <div class="mt-4">
-                <InputLabel for="email" value="Correo" />
-
-                <TextInput
-                    id="email"
-                    type="email"
-                    class="mt-1 block w-full"
-                    v-model="form.email"
-                    required
-                    autocomplete="username"
-                />
-
-                <InputError class="mt-2" :message="form.errors.email" />
-            </div>
-
-            <div class="mt-4">
-                <InputLabel for="password" value="Contreaseña" />
-
-                <TextInput
-                    id="password"
-                    type="password"
-                    class="mt-1 block w-full"
-                    v-model="form.password"
-                    required
-                    autocomplete="new-password"
-                />
-
-                <InputError class="mt-2" :message="form.errors.password" />
-            </div>
-
-            <div class="mt-4">
-                <InputLabel
-                    for="password_confirmation"
-                    value="Confirmar contraseña"
-                />
-
-                <TextInput
-                    id="password_confirmation"
-                    type="password"
-                    class="mt-1 block w-full"
-                    v-model="form.password_confirmation"
-                    required
-                    autocomplete="new-password"
-                />
-
-                <InputError
-                    class="mt-2"
-                    :message="form.errors.password_confirmation"
-                />
-            </div>
-
-            <div class="mt-4 flex items-center justify-end">
-                <Link
-                    :href="route('login')"
-                    class="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                >
-                    Already registered?
-                </Link>
-
-                <PrimaryButton
-                    class="ms-4"
+            <div class="mt-6 flex flex-col items-center space-y-4">
+                <button
+                    class="max-w-xs bg-blue-800 text-white px-4 py-2 rounded-lg flex items-center justify-center space-x-2 hover:bg-blue-700 transition-colors"
                     :class="{ 'opacity-25': form.processing }"
                     :disabled="form.processing"
                 >
-                    Register
-                </PrimaryButton>
+                    <span>Crear cuenta</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                    </svg>
+                </button>
+
+                <Link
+                    :href="route('login')"
+                    class="text-sm text-blue-600 hover:text-blue-900"
+                >
+                    <span>¿Ya tienes una cuenta?</span>
+                </Link>
             </div>
         </form>
     </GuestLayout>

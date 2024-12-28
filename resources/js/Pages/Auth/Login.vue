@@ -39,11 +39,12 @@ const submit = () => {
 
         <form @submit.prevent="submit">
             <div>
-                <InputLabel for="email" value="Email" />
+                <InputLabel for="email"/>
 
                 <TextInput
+                    placeholder="correo electrónico o usuario"
                     id="email"
-                    type="email"
+                    type="text"
                     class="mt-1 block w-full"
                     v-model="form.email"
                     required
@@ -55,9 +56,10 @@ const submit = () => {
             </div>
 
             <div class="mt-4">
-                <InputLabel for="password" value="Password" />
+                <InputLabel for="password" />
 
                 <TextInput
+                    placeholder="contraseña"
                     id="password"
                     type="password"
                     class="mt-1 block w-full"
@@ -69,31 +71,42 @@ const submit = () => {
                 <InputError class="mt-2" :message="form.errors.password" />
             </div>
 
-            <div class="mt-4 block">
-                <label class="flex items-center">
-                    <Checkbox name="remember" v-model:checked="form.remember" />
-                    <span class="ms-2 text-sm text-gray-600"
-                        >Remember me</span
-                    >
-                </label>
-            </div>
-
-            <div class="mt-4 flex items-center justify-end">
+            <div class="mt-4 flex flex-col space-y-4">
                 <Link
-                    v-if="canResetPassword"
                     :href="route('password.request')"
-                    class="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                    class="text-sm text-gray-600 hover:text-gray-900"
                 >
-                    Forgot your password?
+                    ¿Olvidaste tu contraseña?
                 </Link>
 
-                <PrimaryButton
-                    class="ms-4"
+                <button
+                    class="w-full bg-blue-800 text-white px-4 py-2 rounded-lg flex items-center justify-center space-x-2 hover:bg-blue-700 transition-colors"
                     :class="{ 'opacity-25': form.processing }"
                     :disabled="form.processing"
+                    @click="submit"
                 >
-                    Log in
-                </PrimaryButton>
+                    <span>Iniciar Sesión</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                    </svg>
+                </button>
+
+                <Link
+                    :href="route('register')"
+                    class="w-full bg-blue-800 text-white px-4 py-2 rounded-lg flex items-center justify-center space-x-2 hover:bg-blue-700 transition-colors"
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 rotate-180" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                    </svg>
+                    <span>Crear Cuenta</span>
+                </Link>
+
+                <button
+                    :href="route('register')"
+                    class="w-full bg-blue-200 text-gray-700 px-4 py-2 rounded-lg flex items-center justify-center hover:bg-blue-300 transition-colors"
+                >
+                    Continuar con otro método
+                </button>
             </div>
         </form>
     </GuestLayout>
