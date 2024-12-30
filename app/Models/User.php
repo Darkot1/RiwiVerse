@@ -27,6 +27,37 @@ class User extends Authenticatable
         'password',
     ];
 
+    public function country()
+    {
+        return $this->belongsTo(Country::class);
+    }
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
+
+    public function likes()
+    {
+        return $this->hasMany(Like::class);
+    }
+
+    public function dislikes()
+    {
+        return $this->hasMany(Dislike::class);
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+    public function notifications()
+    {
+        return $this->hasMany(Notification::class);
+    }
+    
+
     /**
      * The attributes that should be hidden for serialization.
      *
