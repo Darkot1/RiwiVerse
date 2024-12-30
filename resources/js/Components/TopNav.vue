@@ -16,23 +16,23 @@ defineProps({
             <div class="flex h-16 items-center justify-between">
                 <!-- Logo -->
                 <div class="flex-shrink-0">
-                    <Link :href="route('dashboard')">
+                    <Link :href="route('general')">
                         <h1 class="text-4xl font-bold text-gray-800">RiwiVerse</h1>
                     </Link>
                 </div>
 
                 <!-- Links Escritorio -->
                 <div class="hidden sm:flex items-center justify-center flex-1 space-x-4">
-                    <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
+                    <NavLink :href="route('general')" :active="route().current('general')">
                         General
                     </NavLink>
                     <div class="h-6 w-px bg-gray-300"></div>
-                    <NavLink :href="route('dashboard')" :active="route().current('amigos')">
+                    <NavLink :href="route('friends')" :active="route().current('friends')">
                         Amigos
                     </NavLink>
                     <div class="h-6 w-px bg-gray-300"></div>
-                    <NavLink :href="route('dashboard')" :active="route().current('privados')">
-                        Privados
+                    <NavLink :href="route('private')" :active="route().current('private')">
+                        Personal
                     </NavLink>
                 </div>
 
