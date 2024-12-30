@@ -11,7 +11,7 @@ const showingNavigationDropdown = ref(false);
 
 <template>
     <div>
-        <div class="min-h-screen bg-gray-100">
+        <div class="min-h-screen bg-white">
 
             <TopNav :user="$page.props.auth.user" />
 
