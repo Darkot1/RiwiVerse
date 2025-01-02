@@ -47,7 +47,9 @@ defineProps({
 
                     <div class="hidden sm:flex items-center space-x-4">
                         <!-- Foto/Iniciales del usuario -->
-                        <div class="flex items-center">
+                        <Link :href="route('profile.edit')">
+                            <div class="flex items-center">
+
                             <div v-if="user.profile_picture" class="h-8 w-8 rounded-full overflow-hidden">
                                 <img :src="user.profile_picture" alt="profile" class="h-full w-full object-cover" />
                             </div>
@@ -57,6 +59,7 @@ defineProps({
                                 </span>
                             </div>
                         </div>
+                        </Link>
                         <!-- Botón Cerrar Sesión -->
                         <Link :href="route('logout')" method="post" as="button" class="text-sm text-gray-600 hover:text-gray-900">
                             Cerrar Sesión
