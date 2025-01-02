@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Friend\FriendController;
 use App\Http\Controllers\Post\PostController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
@@ -19,9 +20,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // Rutas principales
     Route::get('/general', [PostController::class, 'index'])->name('general');
 
-    Route::get('/amigos', function () {
-        return Inertia::render('Friends');
-    })->name('friends');
+    Route::get('/amigos', [PostController::class, 'friends'])->name('friends');
 
     Route::get('/personal', [PostController::class, 'private'])->name('private');
 
@@ -35,6 +34,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::post('/store', [PostController::class, 'store'])->name('post.store');
         Route::delete('/{post}', [PostController::class, 'destroy'])->name('post.destroy');
     });
+
+    // Rutas amigos
+    Route::prefix('amigos')->group(function () {
+        Route::post('/store', [FriendController::class, 'store'])->name('friend.store');
+        Route::delete('/{friend}', [FriendController::class, 'destroy'])->name('friend.destroy');
+    });
+
+
 });
 
 require __DIR__.'/auth.php';

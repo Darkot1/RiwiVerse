@@ -10,17 +10,18 @@ return new class extends Migration
      * Run the migrations.
      */
     public function up(): void
-    {
-        Schema::create('friendships', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->foreignId('friend_id')->constrained('users')->onDelete('cascade');
-            $table->enum('status', ['pending', 'accepted', 'rejected'])->default('pending');
-            $table->timestamps();
+{
+    Schema::create('friendships', function (Blueprint $table) {
+        $table->id();
+        $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+        $table->foreignId('friend_id')->constrained('users')->cascadeOnDelete();
+        $table->enum('status', ['pending', 'accepted', 'rejected'])->default('pending');
+        $table->timestamps();
 
-            $table->unique(['user_id', 'friend_id']);
-        });
-    }
+        // Agregar índice único
+        $table->unique(['user_id', 'friend_id']);
+    });
+}
 
     /**
      * Reverse the migrations.
