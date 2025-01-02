@@ -55,7 +55,7 @@ defineProps({
                             </div>
                             <div v-else class="h-8 w-8 rounded-full bg-gray-300 flex items-center justify-center">
                                 <span class="text-sm font-medium text-gray-700">
-                                    {{ user.name.charAt(0) }}{{ user.last_name.charAt(0) }}
+                                    {{ user.name.charAt(0).toUpperCase() }}{{ user.last_name.charAt(0).toUpperCase() }}
                                 </span>
                             </div>
                         </div>
