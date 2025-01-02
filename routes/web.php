@@ -18,14 +18,12 @@ Route::get('/', function () {
 Route::middleware(['auth', 'verified'])->group(function () {
     // Rutas principales
     Route::get('/general', [PostController::class, 'index'])->name('general');
-    
+
     Route::get('/amigos', function () {
         return Inertia::render('Friends');
     })->name('friends');
 
-    Route::get('/personal', function () {
-        return Inertia::render('Private');
-    })->name('private');
+    Route::get('/personal', [PostController::class, 'private'])->name('private');
 
     // Rutas de perfil
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
