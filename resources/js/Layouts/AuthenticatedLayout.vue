@@ -34,11 +34,10 @@ defineExpose({ darkMode, toggleDarkMode });
 <template>
     <div :class="{ 'dark': darkMode }">
         <div class="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-200">
-
             <TopNav :user="$page.props.auth.user" />
 
             <header
-                class="bg-white shadow"
+                class="bg-white dark:bg-gray-800 shadow dark:shadow-gray-700 transition-colors duration-200"
                 v-if="$slots.header"
             >
                 <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
@@ -51,7 +50,6 @@ defineExpose({ darkMode, toggleDarkMode });
             </main>
 
             <BottomNav />
-
         </div>
     </div>
 </template>

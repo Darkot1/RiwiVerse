@@ -16,23 +16,23 @@ const handleImageError = (e) => {
 </script>
 
 <template>
-    <nav class="border-b border-gray-100 bg-white">
+    <nav class="border-b border-gray-100 bg-white dark:bg-gray-800 dark:border-gray-700">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-4">
             <div class="flex h-16 items-center justify-between">
                 <!-- Logo -->
                 <div class="flex-shrink-0">
                     <Link :href="route('general')">
-                        <h1 class="text-4xl font-bold text-gray-800">RiwiVerse</h1>
+                        <h1 class="text-4xl font-bold text-gray-800 dark:text-white">RiwiVerse</h1>
                     </Link>
                 </div>
 
                 <!-- Links Escritorio -->
                 <div class="hidden sm:flex items-center justify-center flex-1 space-x-4">
-                    <NavLink :href="route('general')" :active="route().current('general')">
+                    <NavLink :href="route('general')" :active="route().current('general')" class="dark:text-gray-300 dark:hover:text-white">
                         General
                     </NavLink>
-                    <div class="h-6 w-px bg-gray-300"></div>
-                    <NavLink :href="route('friends')" :active="route().current('friends')">
+                    <div class="h-6 w-px bg-gray-300 dark:bg-gray-700"></div>
+                    <NavLink :href="route('friends')" :active="route().current('friends')" class="dark:text-gray-300 dark:hover:text-white">
                         Amigos
                     </NavLink>
                     <div class="h-6 w-px bg-gray-300"></div>
@@ -54,7 +54,7 @@ const handleImageError = (e) => {
                         <!-- Foto/Iniciales del usuario -->
                         <Link :href="route('profile.edit')">
                             <div class="flex items-center">
-                                <div v-if="user.profile_picture" class="h-12 w-12 rounded-full overflow-hidden ring-2 ring-gray-200">
+                                <div v-if="user.profile_picture" class="h-12 w-12 rounded-full overflow-hidden ring-2 ring-gray-200 dark:ring-gray-700">
                                     <img 
                                         :src="`/storage/${user.profile_picture}`"
                                         :alt="user.name"
