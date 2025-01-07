@@ -50,6 +50,17 @@
     @apply text-gray-100;
 }
 
+.dark .text-sm {
+    @apply text-gray-400;
+}
+
+.dark .text-lg {
+    @apply text-gray-100;
+}
+
+.dark .text-2xl {
+    @apply text-gray-100;
+}
 .dark .text-gray-800 {
     @apply text-gray-100;
 }

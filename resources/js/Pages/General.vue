@@ -10,6 +10,10 @@ const props = defineProps({
   },
 });
 
+const handleImageError = (e, name, lastName) => {
+    e.target.src = `https://ui-avatars.com/api/?name=${name}+${lastName}&color=7F9CF5&background=EBF4FF`;
+};
+
 console.log("Posts recibidos:", props.posts);
 </script>
 
@@ -35,13 +39,21 @@ console.log("Posts recibidos:", props.posts);
               <!-- Header con info de usuario -->
               <div class="p-4 flex items-center justify-between border-b border-gray-100">
                 <div class="flex items-center space-x-3">
-                  <div class="h-10 w-10 rounded-full bg-gray-100 flex items-center justify-center">
-                    <span class="text-sm font-medium text-gray-700">
+                  <div v-if="post.user?.profile_picture" class="h-10 w-10 rounded-full overflow-hidden ring-2 ring-gray-200 dark:ring-gray-700">
+                    <img 
+                      :src="`/storage/${post.user.profile_picture}`"
+                      :alt="post.user.name"
+                      class="h-full w-full object-cover"
+                      @error="handleImageError($event, post.user.name, post.user.last_name)"
+                    />
+                  </div>
+                  <div v-else class="h-10 w-10 rounded-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center">
+                    <span class="text-xl font-medium text-gray-700 dark:text-gray-200">
                       {{ post.user?.name?.charAt(0) }}{{ post.user?.last_name?.charAt(0) }}
                     </span>
                   </div>
                   <div class="flex flex-col">
-                    <span class="text-sm font-medium text-gray-900">
+                    <span class="text-xl font-medium text-gray-900">
                       {{ post.user?.name }} {{ post.user?.last_name }}
                     </span>
                     <span class="text-xs text-gray-500">
