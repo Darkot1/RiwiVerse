@@ -25,6 +25,8 @@ class User extends Authenticatable
         'type',
         'email',
         'password',
+        'profile_picture',
+        'bio'
     ];
 
     public function country()
@@ -57,6 +59,15 @@ class User extends Authenticatable
         return $this->hasMany(Notification::class);
     }
     
+    public function getProfilePictureAttribute($value)
+    {
+        return $value;
+    }
+
+    public function getProfilePictureUrlAttribute()
+    {
+        return $this->profile_picture ? asset('storage/' . $this->profile_picture) : null;
+    }
 
     /**
      * The attributes that should be hidden for serialization.

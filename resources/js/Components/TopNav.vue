@@ -1,13 +1,18 @@
 <script setup>
 import { Link } from '@inertiajs/vue3';
 import NavLink from '@/Components/NavLink.vue';
+import { ref } from 'vue';
 
 defineProps({
     user: {
         type: Object,
-        required: true
+        required: true,
     }
 });
+
+const handleImageError = (e) => {
+    e.target.src = `https://ui-avatars.com/api/?name=${props.user.name}+${props.user.last_name}&color=7F9CF5&background=EBF4FF`;
+};
 </script>
 
 <template>
@@ -49,16 +54,20 @@ defineProps({
                         <!-- Foto/Iniciales del usuario -->
                         <Link :href="route('profile.edit')">
                             <div class="flex items-center">
-
-                            <div v-if="user.profile_picture" class="h-8 w-8 rounded-full overflow-hidden">
-                                <img :src="user.profile_picture" alt="profile" class="h-full w-full object-cover" />
+                                <div v-if="user.profile_picture" class="h-12 w-12 rounded-full overflow-hidden ring-2 ring-gray-200">
+                                    <img 
+                                        :src="`/storage/${user.profile_picture}`"
+                                        :alt="user.name"
+                                        class="h-full w-full object-cover"
+                                        @error="handleImageError"
+                                    />
+                                </div>
+                                <div v-else class="h-12 w-12 rounded-full bg-gray-300 flex items-center justify-center ring-2 ring-gray-200">
+                                    <span class="text-base font-medium text-gray-700">
+                                        {{ user.name.charAt(0).toUpperCase() }}{{ user.last_name.charAt(0).toUpperCase() }}
+                                    </span>
+                                </div>
                             </div>
-                            <div v-else class="h-8 w-8 rounded-full bg-gray-300 flex items-center justify-center">
-                                <span class="text-sm font-medium text-gray-700">
-                                    {{ user.name.charAt(0).toUpperCase() }}{{ user.last_name.charAt(0).toUpperCase() }}
-                                </span>
-                            </div>
-                        </div>
                         </Link>
                         <!-- Botón Cerrar Sesión -->
                         <Link :href="route('logout')" method="post" as="button" class="text-sm text-gray-600 hover:text-gray-900">
